@@ -1,0 +1,24 @@
+<!--Скрипт для изменения картинки товаров-->
+<script type="text/javascript">
+$(function() {
+  // Предварительная загрузка картинок
+  $('head').append('<style class="image_background"></style>');
+
+  $('.transition-scale [class*="circle"] div').each(function() {
+    var widgetId = $(this).closest('div[class="code"]').attr('id');
+    var elem = $(this).closest('[class*="circle"]').attr('class');
+    var urlImage = $(this).attr('url-image');
+
+    $('head .image_background').append('#' + widgetId + ' .transition-scale .' + elem
+      + ' div {background-image: url("' + urlImage + '")}');
+  });
+
+  // Обработка кликов для изменения фото
+  $('.transition-scale a').on('click', function(event) {
+    var clickImage = $(this).find('[class*="circle"] div').attr('url-image');
+    if (clickImage) {
+      $(this).closest('.transition-scale').find('.ram > img').attr('src', clickImage);
+    }
+  });
+});
+</script>
